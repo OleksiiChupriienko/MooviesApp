@@ -11,7 +11,7 @@ typealias Moovies = [Moovie]
 struct APIResponse: Codable {
     let page, totalResults, totalPages: Int
     let results: Moovies
-
+    
     enum CodingKeys: String, CodingKey {
         case page
         case totalResults = "total_results"
@@ -35,7 +35,7 @@ struct Moovie: Codable {
     let title: String
     let voteAverage: Double
     let overview, releaseDate: String
-
+    
     enum CodingKeys: String, CodingKey {
         case popularity
         case voteCount = "vote_count"
