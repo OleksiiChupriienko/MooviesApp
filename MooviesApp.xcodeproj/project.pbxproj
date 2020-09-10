@@ -10,6 +10,8 @@
 		4C64D246250A0A9200D0EABF /* APIResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C64D245250A0A9200D0EABF /* APIResponse.swift */; };
 		4C64D248250A10F000D0EABF /* MooviesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C64D247250A10F000D0EABF /* MooviesAPI.swift */; };
 		4C64D24A250A150B00D0EABF /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C64D249250A150B00D0EABF /* Constants.swift */; };
+		4C64D24D250A25D700D0EABF /* MoovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C64D24B250A25D700D0EABF /* MoovieCell.swift */; };
+		4C64D24E250A25D700D0EABF /* MoovieCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C64D24C250A25D700D0EABF /* MoovieCell.xib */; };
 		4CC729612509047000C48F8D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC729602509047000C48F8D /* AppDelegate.swift */; };
 		4CC729632509047000C48F8D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC729622509047000C48F8D /* SceneDelegate.swift */; };
 		4CC729652509047000C48F8D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC729642509047000C48F8D /* ViewController.swift */; };
@@ -22,6 +24,8 @@
 		4C64D245250A0A9200D0EABF /* APIResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIResponse.swift; sourceTree = "<group>"; };
 		4C64D247250A10F000D0EABF /* MooviesAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MooviesAPI.swift; sourceTree = "<group>"; };
 		4C64D249250A150B00D0EABF /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		4C64D24B250A25D700D0EABF /* MoovieCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoovieCell.swift; sourceTree = "<group>"; };
+		4C64D24C250A25D700D0EABF /* MoovieCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MoovieCell.xib; sourceTree = "<group>"; };
 		4CC7295D2509047000C48F8D /* MooviesApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MooviesApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CC729602509047000C48F8D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4CC729622509047000C48F8D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -62,6 +66,8 @@
 		4CC7295F2509047000C48F8D /* MooviesApp */ = {
 			isa = PBXGroup;
 			children = (
+				4C64D24B250A25D700D0EABF /* MoovieCell.swift */,
+				4C64D24C250A25D700D0EABF /* MoovieCell.xib */,
 				4C64D247250A10F000D0EABF /* MooviesAPI.swift */,
 				4C64D249250A150B00D0EABF /* Constants.swift */,
 				4CC729602509047000C48F8D /* AppDelegate.swift */,
@@ -136,6 +142,7 @@
 			files = (
 				4CC7296D2509047200C48F8D /* LaunchScreen.storyboard in Resources */,
 				4CC7296A2509047200C48F8D /* Assets.xcassets in Resources */,
+				4C64D24E250A25D700D0EABF /* MoovieCell.xib in Resources */,
 				4CC729682509047000C48F8D /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -151,6 +158,7 @@
 				4C64D246250A0A9200D0EABF /* APIResponse.swift in Sources */,
 				4CC729612509047000C48F8D /* AppDelegate.swift in Sources */,
 				4C64D248250A10F000D0EABF /* MooviesAPI.swift in Sources */,
+				4C64D24D250A25D700D0EABF /* MoovieCell.swift in Sources */,
 				4CC729632509047000C48F8D /* SceneDelegate.swift in Sources */,
 				4C64D24A250A150B00D0EABF /* Constants.swift in Sources */,
 			);
