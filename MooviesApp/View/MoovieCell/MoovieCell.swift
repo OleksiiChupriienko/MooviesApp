@@ -9,13 +9,14 @@
 import UIKit
 
 class MoovieCell: UITableViewCell {
+    //MARK: - IBOutlets
     @IBOutlet weak var posterView: UIImageView!
     @IBOutlet weak var labelsBackgroundView: UIView!
     @IBOutlet weak var moovieTitleLabel: UILabel!
     @IBOutlet weak var moovieReleaseYearTitle: UILabel!
     @IBOutlet weak var moovieRatingLabel: UILabel!
     
-    
+    //MARK: - Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
         posterView.layer.cornerRadius = 5

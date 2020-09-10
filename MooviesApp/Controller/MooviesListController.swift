@@ -9,19 +9,23 @@
 import UIKit
 
 class MooviesListController: UIViewController {
-
+    
+    //MARK: - IBOutlets
     @IBOutlet weak var mooviesTable: UITableView!
     
+    //MARK: - Private Properties
     private var moovies: Moovies = []
     private var currentPage = 1
     private var isLoading = false
     
+    //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
         updateList()
     }
     
+    //MARK: - Private Methods
     private func setupTableView() {
         registerCell()
         mooviesTable.dataSource = self
@@ -52,6 +56,7 @@ class MooviesListController: UIViewController {
     
 }
 
+//MARK: - extension UITableViewDataSource
 extension MooviesListController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         moovies.count
@@ -75,6 +80,7 @@ extension MooviesListController: UITableViewDataSource {
     
 }
 
+//MARK: - extension UITableViewDelegate
 extension MooviesListController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         guard let height = tableView.superview?.safeAreaLayoutGuide.layoutFrame.height else {
@@ -91,4 +97,6 @@ extension MooviesListController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
     }
+    
+    
 }

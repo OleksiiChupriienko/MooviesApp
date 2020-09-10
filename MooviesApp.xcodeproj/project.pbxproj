@@ -49,6 +49,66 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4C18BE1D250A71B50001522A /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				4CC729642509047000C48F8D /* MooviesListController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		4C18BE1E250A71C40001522A /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				4C18BE12250A52480001522A /* UIImage+Extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		4C18BE1F250A71D50001522A /* AppDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				4CC729602509047000C48F8D /* AppDelegate.swift */,
+				4CC729622509047000C48F8D /* SceneDelegate.swift */,
+			);
+			path = AppDelegate;
+			sourceTree = "<group>";
+		};
+		4C18BE20250A71E00001522A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				4C64D245250A0A9200D0EABF /* APIResponse.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		4C18BE21250A71EF0001522A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				4CC7296B2509047200C48F8D /* LaunchScreen.storyboard */,
+				4CC729662509047000C48F8D /* Main.storyboard */,
+				4C18BE22250A720C0001522A /* MoovieCell */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		4C18BE22250A720C0001522A /* MoovieCell */ = {
+			isa = PBXGroup;
+			children = (
+				4C64D24B250A25D700D0EABF /* MoovieCell.swift */,
+				4C64D24C250A25D700D0EABF /* MoovieCell.xib */,
+			);
+			path = MoovieCell;
+			sourceTree = "<group>";
+		};
+		4C18BE23250A72210001522A /* AppConstants */ = {
+			isa = PBXGroup;
+			children = (
+				4C64D249250A150B00D0EABF /* Constants.swift */,
+			);
+			path = AppConstants;
+			sourceTree = "<group>";
+		};
 		4CC729542509047000C48F8D = {
 			isa = PBXGroup;
 			children = (
@@ -68,19 +128,15 @@
 		4CC7295F2509047000C48F8D /* MooviesApp */ = {
 			isa = PBXGroup;
 			children = (
-				4C64D24B250A25D700D0EABF /* MoovieCell.swift */,
-				4C64D24C250A25D700D0EABF /* MoovieCell.xib */,
-				4C64D247250A10F000D0EABF /* MooviesAPI.swift */,
-				4C18BE12250A52480001522A /* UIImage+Extension.swift */,
-				4C64D249250A150B00D0EABF /* Constants.swift */,
-				4CC729602509047000C48F8D /* AppDelegate.swift */,
-				4CC729622509047000C48F8D /* SceneDelegate.swift */,
-				4CC729642509047000C48F8D /* MooviesListController.swift */,
-				4C64D245250A0A9200D0EABF /* APIResponse.swift */,
-				4CC729662509047000C48F8D /* Main.storyboard */,
+				4C18BE1F250A71D50001522A /* AppDelegate */,
 				4CC729692509047200C48F8D /* Assets.xcassets */,
-				4CC7296B2509047200C48F8D /* LaunchScreen.storyboard */,
+				4C18BE23250A72210001522A /* AppConstants */,
+				4C18BE1D250A71B50001522A /* Controller */,
+				4C18BE1E250A71C40001522A /* Extensions */,
 				4CC7296E2509047200C48F8D /* Info.plist */,
+				4C18BE20250A71E00001522A /* Model */,
+				4C64D247250A10F000D0EABF /* MooviesAPI.swift */,
+				4C18BE21250A71EF0001522A /* View */,
 			);
 			path = MooviesApp;
 			sourceTree = "<group>";
