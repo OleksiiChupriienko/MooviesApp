@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4C64D246250A0A9200D0EABF /* APIResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C64D245250A0A9200D0EABF /* APIResponse.swift */; };
 		4CC729612509047000C48F8D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC729602509047000C48F8D /* AppDelegate.swift */; };
 		4CC729632509047000C48F8D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC729622509047000C48F8D /* SceneDelegate.swift */; };
 		4CC729652509047000C48F8D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC729642509047000C48F8D /* ViewController.swift */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4C64D245250A0A9200D0EABF /* APIResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIResponse.swift; sourceTree = "<group>"; };
 		4CC7295D2509047000C48F8D /* MooviesApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MooviesApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CC729602509047000C48F8D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4CC729622509047000C48F8D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -59,6 +61,7 @@
 				4CC729602509047000C48F8D /* AppDelegate.swift */,
 				4CC729622509047000C48F8D /* SceneDelegate.swift */,
 				4CC729642509047000C48F8D /* ViewController.swift */,
+				4C64D245250A0A9200D0EABF /* APIResponse.swift */,
 				4CC729662509047000C48F8D /* Main.storyboard */,
 				4CC729692509047200C48F8D /* Assets.xcassets */,
 				4CC7296B2509047200C48F8D /* LaunchScreen.storyboard */,
@@ -139,6 +142,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4CC729652509047000C48F8D /* ViewController.swift in Sources */,
+				4C64D246250A0A9200D0EABF /* APIResponse.swift in Sources */,
 				4CC729612509047000C48F8D /* AppDelegate.swift in Sources */,
 				4CC729632509047000C48F8D /* SceneDelegate.swift in Sources */,
 			);
