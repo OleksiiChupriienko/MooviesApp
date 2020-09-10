@@ -12,13 +12,14 @@ class MooviesListController: UIViewController {
 
     @IBOutlet weak var mooviesTable: UITableView!
     
-    var moovies: Moovies = []
-    var currentPage = 1
+    private var moovies: Moovies = []
+    private var currentPage = 1
+    private var isLoading = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
-        updateList(page: currentPage)
+        updateList()
     }
     
     private func setupTableView() {
@@ -32,7 +33,8 @@ class MooviesListController: UIViewController {
         mooviesTable.register(nib, forCellReuseIdentifier: Constants.moovieCellReuseID)
     }
     
-    private func updateList(page: Int) {
+    private func updateList() {
+        self.isLoading.toggle()
         MooviesAPI.shared.fetchPopularMoovies(page: currentPage) { (result) in
             switch result {
             case .success(let response):
@@ -40,6 +42,7 @@ class MooviesListController: UIViewController {
                 DispatchQueue.main.async {
                     self.mooviesTable.reloadData()
                 }
+                self.isLoading.toggle()
                 self.currentPage += 1
             case .failure(let error):
                 print(error)
@@ -78,5 +81,14 @@ extension MooviesListController: UITableViewDelegate {
             return 200
         }
         return height / 3
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        guard indexPath.row == moovies.count - 3, !isLoading else { return }
+        updateList()
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }

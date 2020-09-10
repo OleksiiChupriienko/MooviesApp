@@ -36,7 +36,6 @@ class MooviesAPI {
         request(url: url) { (result) in
             switch result {
             case .success(let data):
-                print(data)
                 do {
                     let object = try self.decoder.decode(Object.self, from: data)
                     completion(.success(object))
