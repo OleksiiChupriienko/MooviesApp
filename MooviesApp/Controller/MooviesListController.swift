@@ -71,8 +71,10 @@ extension MooviesListController: UITableViewDataSource {
         cell.moovieTitleLabel.text = moovie.title
         cell.moovieReleaseYearTitle.text = moovie.releaseDate
         cell.moovieRatingLabel.text = "⭐️ \(moovie.voteAverage)"
-        if let posterPath = moovie.posterPath {
-            cell.posterView.loadPoster(posterPath: posterPath)
+        if let posterPath = moovie.posterPath, let url = URL(string: Constants.mooviePosterEndpoint.appending(posterPath)) {
+            cell.posterView.loadImage(at: url)
+        } else {
+            cell.posterView.image = UIImage(named: Constants.posterPlaceholderImage)
         }
         return cell
     }

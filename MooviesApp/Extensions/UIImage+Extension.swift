@@ -36,3 +36,13 @@ extension UIImageView {
         }
     }
 }
+
+extension UIImageView {
+  func loadImage(at url: URL) {
+    UIImageLoader.shared.load(url, for: self)
+  }
+
+  func cancelImageLoad() {
+    UIImageLoader.shared.cancel(for: self)
+  }
+}

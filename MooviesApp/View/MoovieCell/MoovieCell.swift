@@ -16,6 +16,8 @@ class MoovieCell: UITableViewCell {
     @IBOutlet weak var moovieReleaseYearTitle: UILabel!
     @IBOutlet weak var moovieRatingLabel: UILabel!
     
+    var onReuse: () -> Void = {}
+    
     //MARK: - Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -26,6 +28,12 @@ class MoovieCell: UITableViewCell {
         labelsBackgroundView.layer.shadowOffset = .init(width: 2, height: 2)
         labelsBackgroundView.layer.shadowRadius = 2
         labelsBackgroundView.layer.shadowOpacity = 1
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        posterView.cancelImageLoad()
+        posterView.image = nil
     }
     
 }
