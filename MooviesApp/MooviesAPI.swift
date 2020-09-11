@@ -24,10 +24,6 @@ class MooviesAPI {
     
     private init() {}
     
-    func fetchPoster(posterPath: String, completion: @escaping (Result<String, Error>) -> Void) {
-        fetchImageData(from: Constants.mooviePosterEndpoint.appending(posterPath), completion: completion)
-    }
-    
     func fetchPopularMoovies(page: Int, completion: @escaping (Result<APIResponse, Error>) -> Void) {
         fetchData(from: Constants.popularMooviesEndpoint.appending("?page=\(page)"), completion: completion)
     }
@@ -43,18 +39,6 @@ class MooviesAPI {
                     print(error)
                     completion(.failure(error))
                 }
-            case .failure(let error):
-                completion(.failure(error))
-            }
-        }
-    }
-    
-    private func fetchImageData(from url: String, completion: @escaping (Result<String, Error>) -> Void) {
-        request(url: url) { (result) in
-            switch result {
-            case .success(let data):
-                let dataString = data.base64EncodedString()
-                completion(.success(dataString))
             case .failure(let error):
                 completion(.failure(error))
             }
