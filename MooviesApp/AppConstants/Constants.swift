@@ -11,6 +11,7 @@ import Foundation
 enum Constants {
     
     static let popularMooviesEndpoint = "https://api.themoviedb.org/3/movie/popular"
+    static let moovieDetailsEndpoint = "https://api.themoviedb.org/3/movie/"
     static let apiKey = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmNzEwZTc5ZjkyYzNjMTg4MzQzMjRmYzNiNmEyNjkyZSIsInN1YiI6IjVmNTcyZTk1ZTYyNzE5MDAzOGVmMWVmYiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.Vt_YPowEwFQ046wESN5KMuUPXBPQ1cqpCqJHqa2-wZ8"
     static let moovieCellReuseID = "MoovieCell"
     static let mooviePosterEndpoint = "http://image.tmdb.org/t/p/w342"

@@ -11,6 +11,7 @@
 		4C4C710E250B6D1900B8B933 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4C710D250B6D1900B8B933 /* ImageLoader.swift */; };
 		4C4C7110250B72C300B8B933 /* UIImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4C710F250B72C300B8B933 /* UIImageLoader.swift */; };
 		4C4C7112250BA09D00B8B933 /* DetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4C7111250BA09D00B8B933 /* DetailsController.swift */; };
+		4C4C7114250BA82200B8B933 /* DetailsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4C7113250BA82200B8B933 /* DetailsResponse.swift */; };
 		4C64D246250A0A9200D0EABF /* APIResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C64D245250A0A9200D0EABF /* APIResponse.swift */; };
 		4C64D248250A10F000D0EABF /* MooviesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C64D247250A10F000D0EABF /* MooviesAPI.swift */; };
 		4C64D24A250A150B00D0EABF /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C64D249250A150B00D0EABF /* Constants.swift */; };
@@ -29,6 +30,7 @@
 		4C4C710D250B6D1900B8B933 /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
 		4C4C710F250B72C300B8B933 /* UIImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageLoader.swift; sourceTree = "<group>"; };
 		4C4C7111250BA09D00B8B933 /* DetailsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsController.swift; sourceTree = "<group>"; };
+		4C4C7113250BA82200B8B933 /* DetailsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsResponse.swift; sourceTree = "<group>"; };
 		4C64D245250A0A9200D0EABF /* APIResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIResponse.swift; sourceTree = "<group>"; };
 		4C64D247250A10F000D0EABF /* MooviesAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MooviesAPI.swift; sourceTree = "<group>"; };
 		4C64D249250A150B00D0EABF /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -85,6 +87,7 @@
 			isa = PBXGroup;
 			children = (
 				4C64D245250A0A9200D0EABF /* APIResponse.swift */,
+				4C4C7113250BA82200B8B933 /* DetailsResponse.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -227,6 +230,7 @@
 				4C64D246250A0A9200D0EABF /* APIResponse.swift in Sources */,
 				4C4C7110250B72C300B8B933 /* UIImageLoader.swift in Sources */,
 				4CC729612509047000C48F8D /* AppDelegate.swift in Sources */,
+				4C4C7114250BA82200B8B933 /* DetailsResponse.swift in Sources */,
 				4C18BE13250A52480001522A /* UIImage+Extension.swift in Sources */,
 				4C64D248250A10F000D0EABF /* MooviesAPI.swift in Sources */,
 				4C4C710E250B6D1900B8B933 /* ImageLoader.swift in Sources */,
