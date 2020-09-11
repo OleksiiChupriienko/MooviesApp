@@ -28,8 +28,9 @@ class MooviesAPI {
         fetchData(from: Constants.popularMooviesEndpoint.appending("?page=\(page)"), completion: completion)
     }
     
-    func fetchDetails(moovieID: String, completion: @escaping (Result<DetailsResponse, Error>) -> Void) {
-        fetchData(from: Constants.moovieDetailsEndpoint.appending(moovieID), completion: completion)
+    func fetchDetails(moovieID: Int, completion: @escaping (Result<DetailsResponse, Error>) -> Void) {
+        let idString = String(moovieID)
+        fetchData(from: Constants.moovieDetailsEndpoint.appending(idString), completion: completion)
     }
     
     private func fetchData<Object: Decodable>(from url: String, completion: @escaping (Result<Object, Error>) -> Void) {

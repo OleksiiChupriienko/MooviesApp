@@ -31,6 +31,9 @@ class MooviesListController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
+        if let detailsVC = segue.destination as? DetailsController, let id = sender as? Int {
+            detailsVC.moovieID = id
+        }
     }
     
     //MARK: - Private Methods
@@ -110,7 +113,7 @@ extension MooviesListController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        performSegue(withIdentifier: Constants.showDetailsSegueID, sender: nil)
+        performSegue(withIdentifier: Constants.showDetailsSegueID, sender: moovies[indexPath.row].id)
     }
     
     

@@ -9,10 +9,14 @@
 import UIKit
 
 class DetailsController: UIViewController {
+    
+    var moovieID: Int!
+    var moovieDetails: DetailsResponse!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationBar()
+        fetchDetails()
     }
     
     private func setupNavigationBar() {
@@ -20,6 +24,18 @@ class DetailsController: UIViewController {
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.navigationBar.isTranslucent = true
+    }
+    
+    private func fetchDetails() {
+        MooviesAPI.shared.fetchDetails(moovieID: moovieID) { (result) in
+            switch result {
+            case .success(let details):
+                self.moovieDetails = details
+                print(self.moovieDetails)
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
 
 }
