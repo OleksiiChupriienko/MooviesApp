@@ -15,6 +15,8 @@ enum Constants {
     static let moovieCellReuseID = "MoovieCell"
     static let mooviePosterEndpoint = "http://image.tmdb.org/t/p/w342"
     static let posterPlaceholderImage = "noImage"
+    static let showDetailsSegueID = "ShowDetails"
+    static let detailsViewControllerID = "DetailsController"
     
     
 }

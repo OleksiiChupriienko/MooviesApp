@@ -25,11 +25,23 @@ class MooviesListController: UIViewController {
         updateList()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        setupVC()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
+    }
+    
     //MARK: - Private Methods
     private func setupTableView() {
         registerCell()
         mooviesTable.dataSource = self
         mooviesTable.delegate = self
+    }
+    
+    private func setupVC() {
+        self.navigationController?.navigationBar.isHidden = true
     }
     
     private func registerCell() {
@@ -98,6 +110,7 @@ extension MooviesListController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        performSegue(withIdentifier: Constants.showDetailsSegueID, sender: nil)
     }
     
     
