@@ -22,12 +22,12 @@ class MooviesListController: UIViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupVC()
         setupTableView()
         updateList()
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        setupVC()
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -42,7 +42,6 @@ class MooviesListController: UIViewController {
         registerCell()
         mooviesTable.dataSource = self
         mooviesTable.delegate = self
-        mooviesTable.prefetchDataSource = self
     }
 
     private func setupVC() {
@@ -54,42 +53,28 @@ class MooviesListController: UIViewController {
         mooviesTable.register(nib, forCellReuseIdentifier: MoovieCell.id)
     }
 
-    private func isLoadingCell(for indexPath: IndexPath) -> Bool {
-        return indexPath.row >= moovies.count
-    }
-
-    private func visibleIndexPathsToReload(intersecting indexPaths: [IndexPath]) -> [IndexPath] {
-        let indexPathsForVisibleRows = mooviesTable.indexPathsForVisibleRows ?? []
-        let indexPathsIntersection = Set(indexPathsForVisibleRows).intersection(indexPaths)
-        return Array(indexPathsIntersection)
-    }
-
-    private func calculateIndexPathsToReload(from newMoovies: Moovies) -> [IndexPath] {
-        let startIndex = moovies.count - newMoovies.count
-        let endIndex = startIndex + newMoovies.count
-        return (startIndex..<endIndex).map { IndexPath(row: $0, section: 0) }
-    }
-
     private func updateList() {
         self.isLoading.toggle()
         MooviesAPI.shared.fetchPopularMoovies(page: currentPage) { (result) in
             switch result {
             case .success(let response):
-                self.totalCount = response.totalResults
+                let startIndex = self.moovies.count
                 self.moovies.append(contentsOf: response.results)
-                self.isLoading.toggle()
-                self.currentPage += 1
-                if response.page > 1 {
+                let endIndex = self.moovies.count
+                if self.currentPage > 1 {
                     DispatchQueue.main.async {
-                        let indexPathToReload = self.visibleIndexPathsToReload(intersecting:
-                            self.calculateIndexPathsToReload(from: response.results))
-                        self.mooviesTable.reloadRows(at: indexPathToReload, with: .automatic)
+                        self.mooviesTable.beginUpdates()
+                        self.mooviesTable.insertRows(at:
+                            (startIndex..<endIndex).map { IndexPath(row: $0, section: 0)}, with: .automatic)
+                        self.mooviesTable.endUpdates()
                     }
                 } else {
                     DispatchQueue.main.async {
-                        self.mooviesTable.reloadData()
+                         self.mooviesTable.reloadData()
                     }
                 }
+                self.isLoading.toggle()
+                self.currentPage += 1
             case .failure(let error):
                 self.isLoading.toggle()
                 print(error)
@@ -102,7 +87,7 @@ class MooviesListController: UIViewController {
 // MARK: - extension UITableViewDataSource
 extension MooviesListController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        totalCount
+        moovies.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -111,9 +96,7 @@ extension MooviesListController: UITableViewDataSource {
             else {
                 fatalError("MoovieCell Error")
         }
-        if isLoadingCell(for: indexPath) {
 
-        } else {
             let moovie = moovies[indexPath.row]
             cell.moovieTitleLabel.text = moovie.title
             cell.moovieReleaseYearTitle.text = moovie.releaseDate
@@ -124,7 +107,6 @@ extension MooviesListController: UITableViewDataSource {
             } else {
                 cell.posterView.image = UIImage(named: Constants.posterPlaceholderImage)
             }
-        }
         return cell
     }
 
@@ -139,23 +121,18 @@ extension MooviesListController: UITableViewDelegate {
         return height / 3
     }
 
-    //    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-    //        guard indexPath.row == moovies.count - 3, !isLoading else { return }
-    //        updateList()
-    //    }
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offsetY = scrollView.contentOffset.y
+        let bottom = scrollView.contentSize.height - scrollView.bounds.height
+
+        if offsetY >= bottom - (mooviesTable.visibleCells.first?.bounds.height ?? 200), !isLoading {
+            updateList()
+        }
+    }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         performSegue(withIdentifier: Constants.showDetailsSegueID, sender: moovies[indexPath.row].id)
-    }
-
-}
-
-extension MooviesListController: UITableViewDataSourcePrefetching {
-    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
-        if indexPaths.contains(where: isLoadingCell) {
-            updateList()
-        }
     }
 
 }
