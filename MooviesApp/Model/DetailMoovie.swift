@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct DetailsResponse: Codable {
+struct DetailMoovie: Codable {
     let adult: Bool
     let backdropPath: String?
     let belongsToCollection: BelongsToCollection?
@@ -56,8 +56,8 @@ struct DetailsResponse: Codable {
 
 // MARK: - BelongsToCollection
 struct BelongsToCollection: Codable {
-    let id: Int
-    let name, posterPath, backdropPath: String
+    let id: Int?
+    let name, posterPath, backdropPath: String?
 
     enum CodingKeys: String, CodingKey {
         case id, name
@@ -88,20 +88,20 @@ struct ProductionCompany: Codable {
 
 // MARK: - ProductionCountry
 struct ProductionCountry: Codable {
-    let iso3166_1, name: String
+    let iso3166, name: String
 
     enum CodingKeys: String, CodingKey {
-        case iso3166_1 = "iso_3166_1"
+        case iso3166 = "iso_3166_1"
         case name
     }
 }
 
 // MARK: - SpokenLanguage
 struct SpokenLanguage: Codable {
-    let iso639_1, name: String
+    let iso639, name: String
 
     enum CodingKeys: String, CodingKey {
-        case iso639_1 = "iso_639_1"
+        case iso639 = "iso_639_1"
         case name
     }
 }

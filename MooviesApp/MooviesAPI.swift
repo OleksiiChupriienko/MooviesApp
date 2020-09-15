@@ -9,30 +9,40 @@
 import UIKit
 
 class MooviesAPI {
-    
+
     static let shared = MooviesAPI()
-    
+    static let popularMooviesEndpoint = "https://api.themoviedb.org/3/movie/popular"
+    static let moovieDetailsEndpoint = "https://api.themoviedb.org/3/movie/"
+    static let apiKey = """
+    eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmNzEwZTc5ZjkyYzNjM\
+    Tg4MzQzMjRmYzNiNmEyNjkyZSIsInN1YiI6IjVmNTcyZTk1ZTYy\
+    NzE5MDAzOGVmMWVmYiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ\
+    2ZXJzaW9uIjoxfQ.Vt_YPowEwFQ046wESN5KMuUPXBPQ1cqpCqJHqa2-wZ8
+    """
+    static let mooviePosterEndpoint = "http://image.tmdb.org/t/p/w342"
+    static let moovieBackdropPathEndpoint = "http://image.tmdb.org/t/p/original"
+
     private let session = URLSession.shared
     private let decoder = JSONDecoder()
-    
+
     private enum APIError: Error {
         case invalidURL
         case serverDoNotResponse
         case serverResponseError
         case canNotReceiveData
     }
-    
+
     private init() {}
-    
-    func fetchPopularMoovies(page: Int, completion: @escaping (Result<APIResponse, Error>) -> Void) {
-        fetchData(from: Constants.popularMooviesEndpoint.appending("?page=\(page)"), completion: completion)
+
+    func fetchPopularMoovies(page: Int, completion: @escaping (Result<PopularMoovies, Error>) -> Void) {
+        fetchData(from: MooviesAPI.popularMooviesEndpoint.appending("?page=\(page)"), completion: completion)
     }
-    
-    func fetchDetails(moovieID: Int, completion: @escaping (Result<DetailsResponse, Error>) -> Void) {
+
+    func fetchDetails(moovieID: Int, completion: @escaping (Result<DetailMoovie, Error>) -> Void) {
         let idString = String(moovieID)
-        fetchData(from: Constants.moovieDetailsEndpoint.appending(idString), completion: completion)
+        fetchData(from: MooviesAPI.moovieDetailsEndpoint.appending(idString), completion: completion)
     }
-    
+
     private func fetchData<Object: Decodable>(from url: String, completion: @escaping (Result<Object, Error>) -> Void) {
         request(url: url) { (result) in
             switch result {
@@ -49,15 +59,15 @@ class MooviesAPI {
             }
         }
     }
-    
+
     private func request(url: String, completion: @escaping (Result<Data, Error>) -> Void) {
         guard let url = URL(string: url) else {
             completion(.failure(APIError.invalidURL))
             return
         }
         var request = URLRequest(url: url)
-        let headerFields = ["Authorization" : "Bearer " + Constants.apiKey,
-                            "Content-Type" : "application/json;charset=utf-8"]
+        let headerFields = ["Authorization": "Bearer " + MooviesAPI.apiKey,
+                            "Content-Type": "application/json;charset=utf-8"]
         request.allHTTPHeaderFields = headerFields
         let task = session.dataTask(with: request) { (data, urlResponse, error) in
             if let error = error {
@@ -80,6 +90,5 @@ class MooviesAPI {
         }
         task.resume()
     }
-    
-    
+
 }
