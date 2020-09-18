@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="KX6-qd-zye">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Moovies List Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="MooviesListController" customModule="MooviesApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="tTU-2O-np4">
+                                <rect key="frame" x="0.0" y="140" width="414" height="722"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.97254901960784312" green="0.97254901960784312" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="tTU-2O-np4" secondAttribute="trailing" id="0bi-D5-M6Z"/>
+                            <constraint firstItem="tTU-2O-np4" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Q6s-am-l4T"/>
+                            <constraint firstItem="tTU-2O-np4" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="UIs-nI-V8O"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="tTU-2O-np4" secondAttribute="bottom" id="ndf-hs-6p4"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="LeD-Sh-pwr"/>
+                    <connections>
+                        <outlet property="mooviesTable" destination="tTU-2O-np4" id="m46-au-ch6"/>
+                        <segue destination="SRI-Vf-Zod" kind="show" identifier="ShowDetails" id="bJO-Aj-Ouz"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1047.8260869565217" y="104.46428571428571"/>
+        </scene>
+        <!--Details Controller-->
+        <scene sceneID="kFL-KH-YzH">
+            <objects>
+                <viewController storyboardIdentifier="DetailsController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="SRI-Vf-Zod" customClass="DetailsController" customModule="MooviesApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Jzk-Qu-hkK">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.10000000000000001" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ULi-fp-kd8">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="537.5"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="KUU-Le-9fR">
+                                <rect key="frame" x="124" y="160" width="166" height="269"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="57L-Ys-Jk3">
+                                <rect key="frame" x="30" y="160" width="13" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="tintColor" systemColor="systemGray2Color" red="0.68235294120000001" green="0.68235294120000001" blue="0.69803921570000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" image="chevron.left" catalog="system"/>
+                                <connections>
+                                    <action selector="backButtonClicked" destination="SRI-Vf-Zod" eventType="touchUpInside" id="Wk6-7M-WdM"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="yZf-D6-lqJ" firstAttribute="trailing" secondItem="ULi-fp-kd8" secondAttribute="trailing" id="DG3-uk-srr"/>
+                            <constraint firstItem="57L-Ys-Jk3" firstAttribute="top" secondItem="yZf-D6-lqJ" secondAttribute="top" constant="20" id="Erx-Xw-WQ7"/>
+                            <constraint firstItem="57L-Ys-Jk3" firstAttribute="leading" secondItem="yZf-D6-lqJ" secondAttribute="leading" constant="30" id="Kfv-Yf-uP3"/>
+                            <constraint firstItem="KUU-Le-9fR" firstAttribute="top" secondItem="yZf-D6-lqJ" secondAttribute="top" constant="20" id="NSS-69-Kqn"/>
+                            <constraint firstItem="KUU-Le-9fR" firstAttribute="centerX" secondItem="yZf-D6-lqJ" secondAttribute="centerX" id="SKI-56-JdL"/>
+                            <constraint firstItem="ULi-fp-kd8" firstAttribute="leading" secondItem="yZf-D6-lqJ" secondAttribute="leading" id="Tiw-PF-fSu"/>
+                            <constraint firstItem="ULi-fp-kd8" firstAttribute="top" secondItem="Jzk-Qu-hkK" secondAttribute="top" id="YMr-Bw-ElE"/>
+                            <constraint firstItem="KUU-Le-9fR" firstAttribute="width" secondItem="yZf-D6-lqJ" secondAttribute="width" multiplier="0.4" id="cko-ff-Nua"/>
+                            <constraint firstItem="ULi-fp-kd8" firstAttribute="height" secondItem="Jzk-Qu-hkK" secondAttribute="height" multiplier="0.6" id="pK3-L3-ikQ"/>
+                            <constraint firstItem="KUU-Le-9fR" firstAttribute="height" secondItem="ULi-fp-kd8" secondAttribute="height" multiplier="0.5" id="vb0-Lk-25Z"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="yZf-D6-lqJ"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="hIA-sP-99x"/>
+                    <connections>
+                        <outlet property="backdropView" destination="ULi-fp-kd8" id="tUU-Ob-dFB"/>
+                        <outlet property="posterView" destination="KUU-Le-9fR" id="07g-zX-tzH"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vAu-fk-l21" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2060.8695652173915" y="103.79464285714285"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="SWM-37-FR3">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="KX6-qd-zye" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="dW0-wa-pwO">
+                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="tintColor" systemColor="systemGray2Color" red="0.68235294120000001" green="0.68235294120000001" blue="0.69803921570000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="ycT-CX-4nQ"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="V0f-nN-Ss5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="137.68115942028987" y="104.46428571428571"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="chevron.left" catalog="system" width="96" height="128"/>
+    </resources>
+</document>
