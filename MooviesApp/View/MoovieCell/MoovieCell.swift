@@ -29,6 +29,7 @@ class MoovieCell: UITableViewCell {
     }
 
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
         labelsBackgroundView.layer.shadowColor = Constants.darkShadowColor
     }
 
