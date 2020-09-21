@@ -6,12 +6,14 @@
 //  Copyright © 2020 Andersen. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 enum Constants {
 
     static let posterPlaceholderImage = "placeholderImage"
     static let showDetailsSegueID = "ShowDetails"
     static let detailsViewControllerID = "DetailsController"
+    static let lightShadowColor = UIColor.lightGray.cgColor
+    static let darkShadowColor = UIColor.darkGray.cgColor
 
 }

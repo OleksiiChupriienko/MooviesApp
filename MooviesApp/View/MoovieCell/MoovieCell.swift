@@ -22,10 +22,15 @@ class MoovieCell: UITableViewCell {
         posterView.layer.cornerRadius = 5
 
         labelsBackgroundView.layer.cornerRadius = 5
-        labelsBackgroundView.layer.shadowColor = UIColor.lightGray.cgColor
+        labelsBackgroundView.layer.shadowColor = Constants.lightShadowColor
         labelsBackgroundView.layer.shadowOffset = .init(width: 2, height: 2)
         labelsBackgroundView.layer.shadowRadius = 2
         labelsBackgroundView.layer.shadowOpacity = 1
+    }
+
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        labelsBackgroundView.layer.shadowColor = Constants.darkShadowColor
     }
 
     override func prepareForReuse() {
