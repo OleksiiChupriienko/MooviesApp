@@ -17,6 +17,7 @@
 		4C64D24A250A150B00D0EABF /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C64D249250A150B00D0EABF /* Constants.swift */; };
 		4C64D24D250A25D700D0EABF /* MoovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C64D24B250A25D700D0EABF /* MoovieCell.swift */; };
 		4C64D24E250A25D700D0EABF /* MoovieCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C64D24C250A25D700D0EABF /* MoovieCell.xib */; };
+		4C9BF6802518B2650046CDEE /* IconButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9BF67F2518B2650046CDEE /* IconButton.swift */; };
 		4CA86AC8250F8727003031A6 /* UITableViewCell+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA86AC7250F8726003031A6 /* UITableViewCell+Extension.swift */; };
 		4CC729612509047000C48F8D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC729602509047000C48F8D /* AppDelegate.swift */; };
 		4CC729632509047000C48F8D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC729622509047000C48F8D /* SceneDelegate.swift */; };
@@ -37,6 +38,7 @@
 		4C64D249250A150B00D0EABF /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		4C64D24B250A25D700D0EABF /* MoovieCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoovieCell.swift; sourceTree = "<group>"; };
 		4C64D24C250A25D700D0EABF /* MoovieCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MoovieCell.xib; sourceTree = "<group>"; };
+		4C9BF67F2518B2650046CDEE /* IconButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconButton.swift; sourceTree = "<group>"; };
 		4CA86AC7250F8726003031A6 /* UITableViewCell+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+Extension.swift"; sourceTree = "<group>"; };
 		4CC7295D2509047000C48F8D /* MooviesApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MooviesApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CC729602509047000C48F8D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -101,6 +103,7 @@
 				4CC7296B2509047200C48F8D /* LaunchScreen.storyboard */,
 				4CC729662509047000C48F8D /* Main.storyboard */,
 				4C18BE22250A720C0001522A /* MoovieCell */,
+				4C9BF67F2518B2650046CDEE /* IconButton.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -251,6 +254,7 @@
 			files = (
 				4CC729652509047000C48F8D /* MooviesListController.swift in Sources */,
 				4C4C7112250BA09D00B8B933 /* DetailsController.swift in Sources */,
+				4C9BF6802518B2650046CDEE /* IconButton.swift in Sources */,
 				4C64D246250A0A9200D0EABF /* PopularMoovies.swift in Sources */,
 				4CA86AC8250F8727003031A6 /* UITableViewCell+Extension.swift in Sources */,
 				4C4C7110250B72C300B8B933 /* UIImageLoader.swift in Sources */,

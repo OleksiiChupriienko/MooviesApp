@@ -15,5 +15,6 @@ enum Constants {
     static let detailsViewControllerID = "DetailsController"
     static let lightShadowColor = UIColor.lightGray.cgColor
     static let darkShadowColor = UIColor.darkGray.cgColor
+    static let detailsOrangeColor = UIColor(red: 1, green: 113/255, blue: 13/255, alpha: 1)
 
 }

@@ -17,7 +17,6 @@ class MooviesListController: UIViewController {
     private var moovies: Moovies = []
     private var currentPage = 1
     private var isLoading = false
-    private var totalCount = 0
 
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -25,9 +24,6 @@ class MooviesListController: UIViewController {
         setupVC()
         setupTableView()
         updateList()
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
