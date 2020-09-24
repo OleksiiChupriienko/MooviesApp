@@ -26,7 +26,7 @@ class UIImageLoader {
                 }
             case .failure:
                 DispatchQueue.main.async {
-                    imageView.image = UIImage(named: Constants.posterPlaceholderImage)
+                    imageView.image = UIImage(named: Constants.Identifiers.posterPlaceholderImage)
                 }
             }
         }

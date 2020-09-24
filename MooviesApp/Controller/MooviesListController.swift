@@ -101,7 +101,7 @@ extension MooviesListController: UITableViewDataSource {
                 let url = URL(string: MooviesAPI.mooviePosterEndpoint.appending(posterPath)) {
                 cell.posterView.loadImage(at: url)
             } else {
-                cell.posterView.image = UIImage(named: Constants.posterPlaceholderImage)
+                cell.posterView.image = UIImage(named: Constants.Identifiers.posterPlaceholderImage)
             }
         return cell
     }
@@ -128,7 +128,7 @@ extension MooviesListController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        performSegue(withIdentifier: Constants.showDetailsSegueID, sender: moovies[indexPath.row].id)
+        performSegue(withIdentifier: Constants.Identifiers.showDetailsSegueID, sender: moovies[indexPath.row].id)
     }
 
 }

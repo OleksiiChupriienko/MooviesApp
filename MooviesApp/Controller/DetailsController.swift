@@ -83,8 +83,8 @@ class DetailsController: UIViewController {
     @IBAction func watchTrailerButtonClicked(_ sender: Any) {
         let query = self.moovieDetails.title + " trailer"
         let escapedQuery = query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
-        let appURL = URL(string: "youtube://www.youtube.com/results?search_query=\(escapedQuery!)")!
-        let webURL = URL(string: "https://www.youtube.com/results?search_query=\(escapedQuery!)")!
+        let appURL = URL(string: Constants.Links.appURL.appending(escapedQuery!))!
+        let webURL = URL(string: Constants.Links.webURL.appending(escapedQuery!))!
         let application = UIApplication.shared
 
         if application.canOpenURL(appURL) {
@@ -93,4 +93,5 @@ class DetailsController: UIViewController {
             application.open(webURL, options: [:], completionHandler: nil)
         }
     }
+
 }
