@@ -103,12 +103,12 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xc9-N1-NMF" customClass="IconButton" customModule="MooviesApp" customModuleProvider="target">
-                                <rect key="frame" x="186" y="279" width="42" height="31"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xc9-N1-NMF">
+                                <rect key="frame" x="182.5" y="276" width="49.5" height="36.5"/>
                                 <color key="tintColor" red="1" green="0.4431372549" blue="0.050980392159999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" image="play.rectangle.fill" catalog="system">
                                     <color key="titleColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
-                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="17"/>
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="35"/>
                                 </state>
                                 <connections>
                                     <action selector="watchTrailerButtonClicked:" destination="SRI-Vf-Zod" eventType="touchUpInside" id="upQ-O7-Ods"/>
