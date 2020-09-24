@@ -33,24 +33,18 @@ class DetailsController: UIViewController {
         self.navigationController?.navigationBar.isHidden = true
     }
 
-    private func rating(_ incoming: Double) -> NSAttributedString {
-        let filled = "★"
-        let unfilled = "☆"
+    private func rating(_ incoming: Double) -> String {
         var ratingString = ""
-
-        var attributes = [NSAttributedString.Key: AnyObject]()
-        attributes[.foregroundColor] = Constants.detailsOrangeColor
-
         let rating = Int(incoming)
 
         for star in 0..<10 {
             if star < rating {
-                ratingString.append(filled)
+                ratingString.append("★")
             } else {
-                ratingString.append(unfilled)
+                ratingString.append("☆")
             }
         }
-        return NSAttributedString(string: ratingString, attributes: attributes)
+        return ratingString
     }
 
     private func fetchDetails() {
@@ -72,7 +66,7 @@ class DetailsController: UIViewController {
                     if let runtime = self.moovieDetails.runtime, runtime > 0 {
                         self.runtimeLabel.text = String(runtime) + " min"
                     }
-                    self.ratingLabel.attributedText = self.rating(self.moovieDetails.voteAverage)
+                    self.ratingLabel.text = self.rating(self.moovieDetails.voteAverage)
                     self.overviewTextView.text = self.moovieDetails.overview
                 }
                 print(self.moovieDetails)
