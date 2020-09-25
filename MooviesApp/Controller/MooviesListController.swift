@@ -17,7 +17,6 @@ class MooviesListController: UIViewController {
     private var moovies: Moovies = []
     private var currentPage = 1
     private var isLoading = false
-    private var totalCount = 0
 
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -25,9 +24,6 @@ class MooviesListController: UIViewController {
         setupVC()
         setupTableView()
         updateList()
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -105,7 +101,7 @@ extension MooviesListController: UITableViewDataSource {
                 let url = URL(string: MooviesAPI.mooviePosterEndpoint.appending(posterPath)) {
                 cell.posterView.loadImage(at: url)
             } else {
-                cell.posterView.image = UIImage(named: Constants.posterPlaceholderImage)
+                cell.posterView.image = UIImage(named: Constants.Identifiers.posterPlaceholderImage)
             }
         return cell
     }
@@ -132,7 +128,7 @@ extension MooviesListController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        performSegue(withIdentifier: Constants.showDetailsSegueID, sender: moovies[indexPath.row].id)
+        performSegue(withIdentifier: Constants.Identifiers.showDetailsSegueID, sender: moovies[indexPath.row].id)
     }
 
 }

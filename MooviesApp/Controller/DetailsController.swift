@@ -12,6 +12,12 @@ class DetailsController: UIViewController {
 
     @IBOutlet weak var backdropView: UIImageView!
     @IBOutlet weak var posterView: UIImageView!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var runtimeLabel: UILabel!
+    @IBOutlet weak var genreLabel: UILabel!
+    @IBOutlet weak var ratingLabel: UILabel!
+    @IBOutlet weak var overviewTextView: UITextView!
+    @IBOutlet weak var watchTrailerButton: UIButton!
 
     var moovieID: Int!
     var moovieDetails: DetailMoovie!
@@ -27,6 +33,20 @@ class DetailsController: UIViewController {
         self.navigationController?.navigationBar.isHidden = true
     }
 
+    private func rating(_ incoming: Double) -> String {
+        var ratingString = ""
+        let rating = Int(incoming)
+
+        for star in 0..<10 {
+            if star < rating {
+                ratingString.append("★")
+            } else {
+                ratingString.append("☆")
+            }
+        }
+        return ratingString
+    }
+
     private func fetchDetails() {
         MooviesAPI.shared.fetchDetails(moovieID: moovieID) { (result) in
             switch result {
@@ -40,6 +60,15 @@ class DetailsController: UIViewController {
                     let url = URL(string: MooviesAPI.mooviePosterEndpoint.appending(posterPath)) {
                      self.posterView.loadImage(at: url)
                 }
+                DispatchQueue.main.async {
+                    self.titleLabel.text = self.moovieDetails.title
+                    self.genreLabel.text = self.moovieDetails.genres.first?.name
+                    if let runtime = self.moovieDetails.runtime, runtime > 0 {
+                        self.runtimeLabel.text = String(runtime) + " min"
+                    }
+                    self.ratingLabel.text = self.rating(self.moovieDetails.voteAverage)
+                    self.overviewTextView.text = self.moovieDetails.overview
+                }
                 print(self.moovieDetails)
             case .failure(let error):
                 print(error)
@@ -49,6 +78,20 @@ class DetailsController: UIViewController {
 
     @IBAction func backButtonClicked() {
         self.navigationController?.popViewController(animated: true)
+    }
+
+    @IBAction func watchTrailerButtonClicked(_ sender: Any) {
+        let query = self.moovieDetails.title + " trailer"
+        let escapedQuery = query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+        let appURL = URL(string: Constants.Links.appURL.appending(escapedQuery!))!
+        let webURL = URL(string: Constants.Links.webURL.appending(escapedQuery!))!
+        let application = UIApplication.shared
+
+        if application.canOpenURL(appURL) {
+            application.open(appURL, options: [:], completionHandler: nil)
+        } else {
+            application.open(webURL, options: [:], completionHandler: nil)
+        }
     }
 
 }

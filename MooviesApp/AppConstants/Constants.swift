@@ -10,10 +10,21 @@ import UIKit
 
 enum Constants {
 
-    static let posterPlaceholderImage = "placeholderImage"
-    static let showDetailsSegueID = "ShowDetails"
-    static let detailsViewControllerID = "DetailsController"
-    static let lightShadowColor = UIColor.lightGray.cgColor
-    static let darkShadowColor = UIColor.darkGray.cgColor
+    enum Colors {
+        static let lightShadowColor = UIColor.lightGray.cgColor
+        static let darkShadowColor = UIColor.darkGray.cgColor
+        static let detailsOrangeColor = UIColor(red: 1, green: 113/255, blue: 13/255, alpha: 1)
+    }
+
+    enum Links {
+        static let appURL = "youtube://www.youtube.com/results?search_query="
+        static let webURL = "https://www.youtube.com/results?search_query="
+    }
+
+    enum Identifiers {
+        static let posterPlaceholderImage = "placeholderImage"
+        static let showDetailsSegueID = "ShowDetails"
+        static let detailsViewControllerID = "DetailsController"
+    }
 
 }
