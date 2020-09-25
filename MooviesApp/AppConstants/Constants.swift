@@ -23,8 +23,7 @@ enum Constants {
 
     enum Identifiers {
         static let posterPlaceholderImage = "placeholderImage"
-        static let showDetailsSegueID = "ShowDetails"
-        static let detailsViewControllerID = "DetailsController"
+        static let detailsViewControllerID = "detailsController"
     }
 
 }

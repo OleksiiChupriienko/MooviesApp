@@ -10,7 +10,6 @@ import UIKit
 
 class MooviesAPI {
 
-    static let shared = MooviesAPI()
     static let popularMooviesEndpoint = "https://api.themoviedb.org/3/movie/popular"
     static let moovieDetailsEndpoint = "https://api.themoviedb.org/3/movie/"
     static let apiKey = """
@@ -32,7 +31,7 @@ class MooviesAPI {
         case canNotReceiveData
     }
 
-    private init() {}
+    init() {}
 
     func fetchPopularMoovies(page: Int, completion: @escaping (Result<PopularMoovies, Error>) -> Void) {
         fetchData(from: MooviesAPI.popularMooviesEndpoint.appending("?page=\(page)"), completion: completion)

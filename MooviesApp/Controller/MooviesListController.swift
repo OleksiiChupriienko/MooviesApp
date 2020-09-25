@@ -14,9 +14,19 @@ class MooviesListController: UIViewController {
     @IBOutlet weak var mooviesTable: UITableView!
 
     // MARK: - Private Properties
+    private let mooviesAPI: MooviesAPI
     private var moovies: Moovies = []
     private var currentPage = 1
     private var isLoading = false
+
+    init?(coder: NSCoder, mooviesAPI: MooviesAPI) {
+        self.mooviesAPI = mooviesAPI
+        super.init(coder: coder)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -26,12 +36,6 @@ class MooviesListController: UIViewController {
         updateList()
     }
 
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        super.prepare(for: segue, sender: sender)
-        if let detailsVC = segue.destination as? DetailsController, let id = sender as? Int {
-            detailsVC.moovieID = id
-        }
-    }
 
     // MARK: - Private Methods
     private func setupTableView() {
@@ -51,7 +55,7 @@ class MooviesListController: UIViewController {
 
     private func updateList() {
         self.isLoading.toggle()
-        MooviesAPI.shared.fetchPopularMoovies(page: currentPage) { (result) in
+        mooviesAPI.fetchPopularMoovies(page: currentPage) { (result) in
             switch result {
             case .success(let response):
                 let startIndex = self.moovies.count
@@ -128,7 +132,12 @@ extension MooviesListController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        performSegue(withIdentifier: Constants.Identifiers.showDetailsSegueID, sender: moovies[indexPath.row].id)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let moovieID = moovies[indexPath.row].id
+        let detailsVC = storyboard.instantiateViewController(identifier: Constants.Identifiers.detailsViewControllerID, creator: { (coder) -> DetailsController? in
+            return DetailsController(coder: coder, mooviesAPI: self.mooviesAPI, moovieID: moovieID)
+        })
+        self.navigationController?.pushViewController(detailsVC, animated: true)
     }
 
 }
