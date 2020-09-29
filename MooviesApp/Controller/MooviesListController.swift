@@ -13,19 +13,16 @@ class MooviesListController: UIViewController {
     // MARK: - IBOutlets
     @IBOutlet weak var mooviesTable: UITableView!
 
+    var mooviesAPI: MooviesAPI!
+    
     // MARK: - Private Properties
-    private let mooviesAPI: MooviesAPI
     private var moovies: Moovies = []
+    private var filteredMoovies: Moovies = []
     private var currentPage = 1
     private var isLoading = false
-
-    init?(coder: NSCoder, mooviesAPI: MooviesAPI) {
-        self.mooviesAPI = mooviesAPI
-        super.init(coder: coder)
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    private let searchController = UISearchController(searchResultsController: nil)
+    private var searchBarIsEmpty: Bool {
+        searchController.searchBar.text?.isEmpty ?? true
     }
 
     // MARK: - Lifecycle
@@ -36,7 +33,6 @@ class MooviesListController: UIViewController {
         updateList()
     }
 
-
     // MARK: - Private Methods
     private func setupTableView() {
         registerCell()
@@ -45,7 +41,13 @@ class MooviesListController: UIViewController {
     }
 
     private func setupVC() {
-        self.navigationController?.navigationBar.isHidden = true
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Enter moovie title"
+        navigationItem.searchController = searchController
+        navigationItem.title = "Popular moovies"
+        navigationItem.hidesSearchBarWhenScrolling = false
+        definesPresentationContext = true
     }
 
     private func registerCell() {
@@ -87,7 +89,7 @@ class MooviesListController: UIViewController {
 // MARK: - extension UITableViewDataSource
 extension MooviesListController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        moovies.count
+        searchBarIsEmpty ? moovies.count : filteredMoovies.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -97,7 +99,7 @@ extension MooviesListController: UITableViewDataSource {
                 fatalError("MoovieCell Error")
         }
 
-            let moovie = moovies[indexPath.row]
+        let moovie = searchBarIsEmpty ? moovies[indexPath.row] : filteredMoovies[indexPath.row]
             cell.moovieTitleLabel.text = moovie.title
             cell.moovieReleaseYearTitle.text = moovie.releaseDate
             cell.moovieRatingLabel.text = "⭐️ \(moovie.voteAverage)"
@@ -125,7 +127,7 @@ extension MooviesListController: UITableViewDelegate {
         let offsetY = scrollView.contentOffset.y
         let bottom = scrollView.contentSize.height - scrollView.bounds.height
 
-        if offsetY >= bottom - (mooviesTable.visibleCells.first?.bounds.height ?? 200), !isLoading {
+        if offsetY >= bottom - (mooviesTable.visibleCells.first?.bounds.height ?? 200), !isLoading, searchBarIsEmpty {
             updateList()
         }
     }
@@ -134,10 +136,24 @@ extension MooviesListController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let moovieID = moovies[indexPath.row].id
-        let detailsVC = storyboard.instantiateViewController(identifier: Constants.Identifiers.detailsViewControllerID, creator: { (coder) -> DetailsController? in
-            return DetailsController(coder: coder, mooviesAPI: self.mooviesAPI, moovieID: moovieID)
-        })
-        self.navigationController?.pushViewController(detailsVC, animated: true)
+        if let detailsVC = storyboard.instantiateViewController(withIdentifier: Constants.Identifiers.detailsViewControllerID) as? DetailsController {
+            detailsVC.moovieID = moovieID
+            detailsVC.mooviesAPI = self.mooviesAPI
+            detailsVC.navigationController?.navigationItem.hidesBackButton = true
+            self.navigationController?.pushViewController(detailsVC, animated: true)
+        }
+    }
+
+}
+
+extension MooviesListController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        filterContentForSearchText(searchController.searchBar.text!)
+    }
+
+    private func filterContentForSearchText(_ searchText: String) {
+        filteredMoovies = moovies.filter({ $0.title.lowercased().contains(searchText.lowercased()) })
+        mooviesTable.reloadData()
     }
 
 }

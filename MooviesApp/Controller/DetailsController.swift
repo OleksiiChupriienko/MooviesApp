@@ -19,20 +19,9 @@ class DetailsController: UIViewController {
     @IBOutlet weak var overviewTextView: UITextView!
     @IBOutlet weak var watchTrailerButton: UIButton!
 
-    private let mooviesAPI: MooviesAPI
-
-    private var moovieID: Int
-    private var moovieDetails: DetailMoovie!
-
-    init?(coder: NSCoder, mooviesAPI: MooviesAPI, moovieID: Int) {
-        self.mooviesAPI = mooviesAPI
-        self.moovieID = moovieID
-        super.init(coder: coder)
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    var mooviesAPI: MooviesAPI!
+    var moovieID: Int!
+    var moovieDetails: DetailMoovie!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,7 +31,13 @@ class DetailsController: UIViewController {
     }
 
     private func setupNavigationBar() {
+        self.navigationItem.hidesBackButton = true
         self.navigationController?.navigationBar.isHidden = true
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.navigationController?.navigationBar.isHidden = false
     }
 
     private func rating(_ incoming: Double) -> String {
