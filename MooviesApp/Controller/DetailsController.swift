@@ -19,6 +19,7 @@ class DetailsController: UIViewController {
     @IBOutlet weak var overviewTextView: UITextView!
     @IBOutlet weak var watchTrailerButton: UIButton!
 
+    var mooviesAPI: MooviesAPI!
     var moovieID: Int!
     var moovieDetails: DetailMoovie!
 
@@ -30,7 +31,13 @@ class DetailsController: UIViewController {
     }
 
     private func setupNavigationBar() {
+        self.navigationItem.hidesBackButton = true
         self.navigationController?.navigationBar.isHidden = true
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.navigationController?.navigationBar.isHidden = false
     }
 
     private func rating(_ incoming: Double) -> String {
@@ -48,7 +55,7 @@ class DetailsController: UIViewController {
     }
 
     private func fetchDetails() {
-        MooviesAPI.shared.fetchDetails(moovieID: moovieID) { (result) in
+        mooviesAPI.fetchDetails(moovieID: moovieID) { (result) in
             switch result {
             case .success(let details):
                 self.moovieDetails = details
