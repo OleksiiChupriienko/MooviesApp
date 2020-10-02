@@ -8,29 +8,34 @@
 
 import UIKit
 
+protocol MooviesListView: class {
+    func setMoovies(moovies: [MoovieViewData])
+    func showDetails(nextPresenter: DetailsPresenter, moovieID: Int)
+}
+
 class MooviesListController: UIViewController {
 
     // MARK: - IBOutlets
     @IBOutlet weak var mooviesTable: UITableView!
 
     var mooviesAPI: MooviesAPI!
-    
+
     // MARK: - Private Properties
-    private var moovies: Moovies = []
-    private var filteredMoovies: Moovies = []
-    private var currentPage = 1
-    private var isLoading = false
+    private var mooviesToDisplay: [MoovieViewData] = []
+    private var filteredMoovies: [MoovieViewData] = []
     private let searchController = UISearchController(searchResultsController: nil)
     private var searchBarIsEmpty: Bool {
         searchController.searchBar.text?.isEmpty ?? true
     }
+    var presenter: MooviesListPresenter!
 
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupVC()
         setupTableView()
-        updateList()
+        presenter.attachView(view: self)
+        presenter.getMoovies()
     }
 
     // MARK: - Private Methods
@@ -38,6 +43,7 @@ class MooviesListController: UIViewController {
         registerCell()
         mooviesTable.dataSource = self
         mooviesTable.delegate = self
+        mooviesTable.keyboardDismissMode = .onDrag
     }
 
     private func setupVC() {
@@ -55,41 +61,12 @@ class MooviesListController: UIViewController {
         mooviesTable.register(nib, forCellReuseIdentifier: MoovieCell.id)
     }
 
-    private func updateList() {
-        self.isLoading.toggle()
-        mooviesAPI.fetchPopularMoovies(page: currentPage) { (result) in
-            switch result {
-            case .success(let response):
-                let startIndex = self.moovies.count
-                self.moovies.append(contentsOf: response.results)
-                let endIndex = self.moovies.count
-                if self.currentPage > 1 {
-                    DispatchQueue.main.async {
-                        self.mooviesTable.beginUpdates()
-                        self.mooviesTable.insertRows(at:
-                            (startIndex..<endIndex).map { IndexPath(row: $0, section: 0)}, with: .automatic)
-                        self.mooviesTable.endUpdates()
-                    }
-                } else {
-                    DispatchQueue.main.async {
-                         self.mooviesTable.reloadData()
-                    }
-                }
-                self.isLoading.toggle()
-                self.currentPage += 1
-            case .failure(let error):
-                self.isLoading.toggle()
-                print(error)
-            }
-        }
-    }
-
 }
 
 // MARK: - extension UITableViewDataSource
 extension MooviesListController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        searchBarIsEmpty ? moovies.count : filteredMoovies.count
+        searchBarIsEmpty ? mooviesToDisplay.count : filteredMoovies.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -99,16 +76,16 @@ extension MooviesListController: UITableViewDataSource {
                 fatalError("MoovieCell Error")
         }
 
-        let moovie = searchBarIsEmpty ? moovies[indexPath.row] : filteredMoovies[indexPath.row]
-            cell.moovieTitleLabel.text = moovie.title
-            cell.moovieReleaseYearTitle.text = moovie.releaseDate
-            cell.moovieRatingLabel.text = "⭐️ \(moovie.voteAverage)"
-            if let posterPath = moovie.posterPath,
-                let url = URL(string: MooviesAPI.mooviePosterEndpoint.appending(posterPath)) {
-                cell.posterView.loadImage(at: url)
-            } else {
-                cell.posterView.image = UIImage(named: Constants.Identifiers.posterPlaceholderImage)
-            }
+        let moovie = searchBarIsEmpty ? mooviesToDisplay[indexPath.row] : filteredMoovies[indexPath.row]
+        cell.moovieTitleLabel.text = moovie.title
+        cell.moovieReleaseYearTitle.text = moovie.releaseDate
+        cell.moovieRatingLabel.text = moovie.rating
+        if let posterPath = moovie.posterPath,
+            let url = URL(string: MooviesAPI.mooviePosterEndpoint.appending(posterPath)) {
+            cell.posterView.loadImage(at: url)
+        } else {
+            cell.posterView.image = UIImage(named: Constants.Identifiers.posterPlaceholderImage)
+        }
         return cell
     }
 
@@ -126,22 +103,15 @@ extension MooviesListController: UITableViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let offsetY = scrollView.contentOffset.y
         let bottom = scrollView.contentSize.height - scrollView.bounds.height
-
-        if offsetY >= bottom - (mooviesTable.visibleCells.first?.bounds.height ?? 200), !isLoading, searchBarIsEmpty {
-            updateList()
+        if offsetY >= bottom - (mooviesTable.visibleCells.first?.bounds.height ?? 200), !presenter.isLoading, searchBarIsEmpty {
+            presenter.getMoovies()
         }
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let moovieID = moovies[indexPath.row].id
-        if let detailsVC = storyboard.instantiateViewController(withIdentifier: Constants.Identifiers.detailsViewControllerID) as? DetailsController {
-            detailsVC.moovieID = moovieID
-            detailsVC.mooviesAPI = self.mooviesAPI
-            detailsVC.navigationController?.navigationItem.hidesBackButton = true
-            self.navigationController?.pushViewController(detailsVC, animated: true)
-        }
+        let moovieID = searchBarIsEmpty ? mooviesToDisplay[indexPath.row].id : filteredMoovies[indexPath.row].id
+        presenter.showDetails(row: indexPath.row, moovieID: moovieID)
     }
 
 }
@@ -152,8 +122,36 @@ extension MooviesListController: UISearchResultsUpdating {
     }
 
     private func filterContentForSearchText(_ searchText: String) {
-        filteredMoovies = moovies.filter({ $0.title.lowercased().contains(searchText.lowercased()) })
+        filteredMoovies = mooviesToDisplay.filter({ $0.title.lowercased().contains(searchText.lowercased()) })
         mooviesTable.reloadData()
+    }
+
+}
+
+extension MooviesListController: MooviesListView {
+    func showDetails(nextPresenter: DetailsPresenter, moovieID: Int) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        if let detailsVC = storyboard.instantiateViewController(withIdentifier:
+            Constants.Identifiers.detailsViewControllerID) as? DetailsController {
+            detailsVC.presenter = nextPresenter
+            detailsVC.moovieID = moovieID
+            navigationController?.pushViewController(detailsVC, animated: true)
+        }
+
+    }
+
+    func setMoovies(moovies: [MoovieViewData]) {
+        let startIndex = self.mooviesToDisplay.count
+        self.mooviesToDisplay.append(contentsOf: moovies)
+        let endIndex = self.mooviesToDisplay.count
+        if presenter.currentPage > 1 {
+            self.mooviesTable.beginUpdates()
+            self.mooviesTable.insertRows(at:
+                (startIndex..<endIndex).map { IndexPath(row: $0, section: 0)}, with: .automatic)
+            self.mooviesTable.endUpdates()
+        } else {
+            self.mooviesTable.reloadData()
+        }
     }
 
 }
