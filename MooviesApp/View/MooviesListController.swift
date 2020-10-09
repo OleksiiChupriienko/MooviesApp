@@ -8,11 +8,6 @@
 
 import UIKit
 
-protocol MooviesListView: class {
-    func setMoovies(moovies: [MoovieViewData])
-    func showDetails(nextPresenter: DetailsPresenter, moovieID: Int)
-}
-
 class MooviesListController: UIViewController {
 
     // MARK: - IBOutlets
@@ -111,6 +106,7 @@ extension MooviesListController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let moovieID = searchBarIsEmpty ? mooviesToDisplay[indexPath.row].id : filteredMoovies[indexPath.row].id
+        presenter.moovieID = moovieID
         presenter.showDetails(row: indexPath.row, moovieID: moovieID)
     }
 
@@ -118,23 +114,19 @@ extension MooviesListController: UITableViewDelegate {
 
 extension MooviesListController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
-        filterContentForSearchText(searchController.searchBar.text!)
-    }
-
-    private func filterContentForSearchText(_ searchText: String) {
-        filteredMoovies = mooviesToDisplay.filter({ $0.title.lowercased().contains(searchText.lowercased()) })
+        filteredMoovies = mooviesToDisplay.filter({ $0.title.lowercased().contains(searchController.searchBar.text!.lowercased()) })
         mooviesTable.reloadData()
     }
 
 }
 
 extension MooviesListController: MooviesListView {
-    func showDetails(nextPresenter: DetailsPresenter, moovieID: Int) {
+    func showDetails(nextPresenter: DetailsPresenter) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         if let detailsVC = storyboard.instantiateViewController(withIdentifier:
             Constants.Identifiers.detailsViewControllerID) as? DetailsController {
             detailsVC.presenter = nextPresenter
-            detailsVC.moovieID = moovieID
+            detailsVC.moovieID = presenter.moovieID
             navigationController?.pushViewController(detailsVC, animated: true)
         }
 
@@ -144,14 +136,17 @@ extension MooviesListController: MooviesListView {
         let startIndex = self.mooviesToDisplay.count
         self.mooviesToDisplay.append(contentsOf: moovies)
         let endIndex = self.mooviesToDisplay.count
-        if presenter.currentPage > 1 {
-            self.mooviesTable.beginUpdates()
-            self.mooviesTable.insertRows(at:
-                (startIndex..<endIndex).map { IndexPath(row: $0, section: 0)}, with: .automatic)
-            self.mooviesTable.endUpdates()
-        } else {
-            self.mooviesTable.reloadData()
+        DispatchQueue.main.async {
+            if self.presenter.currentPage > 1 {
+                self.mooviesTable.beginUpdates()
+                self.mooviesTable.insertRows(at:
+                    (startIndex..<endIndex).map { IndexPath(row: $0, section: 0)}, with: .automatic)
+                self.mooviesTable.endUpdates()
+            } else {
+                self.mooviesTable.reloadData()
+            }
         }
+    
     }
 
 }

@@ -8,20 +8,26 @@
 
 import Foundation
 
+protocol MooviesListView: class {
+    func setMoovies(moovies: [MoovieViewData])
+    func showDetails(nextPresenter: DetailsPresenter)
+}
+
 class MooviesListPresenter {
     private let mooviesAPI: MooviesAPI
     weak private var mooviesListView: MooviesListView?
     private(set) var currentPage = 1
     private(set) var isLoading = false
-    
+    var moovieID: Int?
+
     init(mooviesAPI: MooviesAPI) {
         self.mooviesAPI = mooviesAPI
     }
-    
+
     func attachView(view: MooviesListView) {
         mooviesListView = view
     }
-    
+
     func getMoovies() {
         if !isLoading {
             isLoading.toggle()
@@ -31,9 +37,7 @@ class MooviesListPresenter {
                     let dataToPresent = popularMoovies.results.map { MoovieViewData(title:
                         $0.title, releaseDate: $0.releaseDate, rating:
                         "⭐️ \($0.voteAverage)", posterPath: $0.posterPath, id: $0.id)}
-                    DispatchQueue.main.async {
-                        self?.mooviesListView?.setMoovies(moovies: dataToPresent)
-                    }
+                    self?.mooviesListView?.setMoovies(moovies: dataToPresent)
                     self?.currentPage += 1
                     self?.isLoading.toggle()
                 case .failure(let error):
@@ -43,9 +47,10 @@ class MooviesListPresenter {
             }
         }
     }
-    
+
     func showDetails(row: Int, moovieID: Int) {
         let presenter = DetailsPresenter(mooviesAPI: self.mooviesAPI)
-        mooviesListView?.showDetails(nextPresenter: presenter, moovieID: moovieID)
+        presenter.moovieID = moovieID
+        mooviesListView?.showDetails(nextPresenter: presenter)
     }
 }

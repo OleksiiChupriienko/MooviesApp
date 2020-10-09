@@ -8,9 +8,14 @@
 
 import Foundation
 
+protocol DetailsView: class {
+    func setDetails(details: DetailMoovieViewData)
+}
+
 class DetailsPresenter {
     private var mooviesAPI: MooviesAPI
     private weak var view: DetailsView?
+    var moovieID: Int!
 
     init(mooviesAPI: MooviesAPI) {
         self.mooviesAPI = mooviesAPI
@@ -36,7 +41,7 @@ class DetailsPresenter {
 
     func getInfo() {
         if let view = self.view {
-            mooviesAPI.fetchDetails(moovieID: view.id) { (result) in
+            mooviesAPI.fetchDetails(moovieID: moovieID) { (result) in
                 switch result {
                 case .success(let detailMoovie):
                     let dataToPresent = DetailMoovieViewData(posterPath:

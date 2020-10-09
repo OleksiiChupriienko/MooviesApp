@@ -8,10 +8,7 @@
 
 import UIKit
 
-protocol DetailsView: class {
-    var id: Int { get }
-    func setDetails(details: DetailMoovieViewData)
-}
+
 
 class DetailsController: UIViewController {
 
@@ -87,10 +84,6 @@ extension DetailsController: DetailsView {
             self.ratingLabel.text = details.rating
             self.overviewTextView.text = details.overview
         }
-    }
-
-    var id: Int {
-        return self.moovieID
     }
 
 }
