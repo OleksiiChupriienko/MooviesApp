@@ -13,8 +13,6 @@ class MooviesListController: UIViewController {
     // MARK: - IBOutlets
     @IBOutlet weak var mooviesTable: UITableView!
 
-    var mooviesAPI: MooviesAPI!
-
     // MARK: - Private Properties
     private var mooviesToDisplay: [MoovieViewData] = []
     private var filteredMoovies: [MoovieViewData] = []
@@ -146,7 +144,6 @@ extension MooviesListController: MooviesListView {
                 self.mooviesTable.reloadData()
             }
         }
-    
     }
 
 }
