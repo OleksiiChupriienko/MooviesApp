@@ -21,6 +21,11 @@ class MooviesListController: UIViewController {
         searchController.searchBar.text?.isEmpty ?? true
     }
     var presenter: MooviesListPresenter!
+    
+    
+    
+    
+    
 
     // MARK: - Lifecycle
     override func viewDidLoad() {
