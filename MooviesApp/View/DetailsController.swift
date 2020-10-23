@@ -8,8 +8,6 @@
 
 import UIKit
 
-
-
 class DetailsController: UIViewController {
 
     @IBOutlet weak var backdropView: UIImageView!
