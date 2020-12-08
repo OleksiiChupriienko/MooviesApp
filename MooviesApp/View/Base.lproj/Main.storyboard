@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -47,14 +48,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.10000000000000001" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ULi-fp-kd8">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.10000000000000001" contentMode="redraw" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ULi-fp-kd8">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="537.5"/>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="KUU-Le-9fR">
                                 <rect key="frame" x="124" y="64" width="166" height="269"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="57L-Ys-Jk3">
-                                <rect key="frame" x="30" y="64" width="8" height="21"/>
+                                <rect key="frame" x="20" y="64" width="28" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="28" id="jyZ-ZG-KKj"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="tintColor" systemColor="systemGray2Color" red="0.68235294120000001" green="0.68235294120000001" blue="0.69803921570000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" image="chevron.backward">
@@ -125,7 +129,7 @@
                             <constraint firstItem="57L-Ys-Jk3" firstAttribute="top" secondItem="yZf-D6-lqJ" secondAttribute="top" constant="20" id="Erx-Xw-WQ7"/>
                             <constraint firstItem="vO1-C6-ZMS" firstAttribute="leading" secondItem="yZf-D6-lqJ" secondAttribute="leading" constant="20" id="FrL-jI-yAu"/>
                             <constraint firstItem="yZf-D6-lqJ" firstAttribute="trailing" secondItem="vO1-C6-ZMS" secondAttribute="trailing" constant="20" id="JNB-7o-OVP"/>
-                            <constraint firstItem="57L-Ys-Jk3" firstAttribute="leading" secondItem="yZf-D6-lqJ" secondAttribute="leading" constant="30" id="Kfv-Yf-uP3"/>
+                            <constraint firstItem="57L-Ys-Jk3" firstAttribute="leading" secondItem="yZf-D6-lqJ" secondAttribute="leading" constant="20" id="Kfv-Yf-uP3"/>
                             <constraint firstItem="yZf-D6-lqJ" firstAttribute="trailing" secondItem="gow-vH-DFX" secondAttribute="trailing" constant="20" id="L9D-ou-e2h"/>
                             <constraint firstItem="vO1-C6-ZMS" firstAttribute="top" secondItem="gow-vH-DFX" secondAttribute="bottom" constant="20" id="Mxe-FP-Co4"/>
                             <constraint firstItem="KUU-Le-9fR" firstAttribute="top" secondItem="yZf-D6-lqJ" secondAttribute="top" constant="20" id="NSS-69-Kqn"/>

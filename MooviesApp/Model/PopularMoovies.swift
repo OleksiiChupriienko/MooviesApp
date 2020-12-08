@@ -34,7 +34,8 @@ struct Moovie: Codable {
     let genreIDS: [Int]
     let title: String
     let voteAverage: Double
-    let overview, releaseDate: String
+    let overview: String
+    let releaseDate: String?
 
     enum CodingKeys: String, CodingKey {
         case popularity
